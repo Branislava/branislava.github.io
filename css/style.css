@@ -336,54 +336,32 @@ Copyright (c) 2012 Dan Eden
     animation-name: bounceInDown;
 }
 
-ul#menu {
+div#menu {
   position: fixed;
-  top: 10px;
-  font-size: 18px;
-  width: 75%;
-  position: fixed;
-  left: 80%;
-  height: 50px;
-  opacity: 0.8;
-  display: block;
-  top: 20%;
-}
-
-ul#menu li {
-
-}
-
-/*
-ul#menu {
-  position: fixed;
-  background-color: black;
-  top: 10px;
-  font-size: 18px;
-  width: 75%;
-  position: fixed;
-  left: 50%;
-  margin-left: -37.5%;
-  height: 50px;
-  opacity: 0.8;
-  display: block;
+  top: 0;
+  width: 100%;
+  font-size: 16px;
+  margin-left: -10%;
+  background-color: #333;
+  opacity: 0.7;
+  overflow: hidden;
   
 }
 
-
-a.menu_links {
-  text-align: center;
-  vertical-align: middle;
-  line-height: 50px; 
-  font-weight: normal;
+div#menu a {
   display: inline-block;
-  width: 128px;
-  margin: auto;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px;
+  text-decoration: none;
+  text-align: center;
+  text-decoration: none;
+  float: right;
 }
 
-ul#menu li {
-    display:inline;
+div#menu a:hover {
+  background-color: #222;
 }
-*/
 
 .panel {
     width: 80%;
@@ -445,6 +423,15 @@ dl.education dt {
     }
     .publication_container {
         width: 25%;
+    }
+
+    div#menu {
+        flex-direction: column;
+    }
+
+    /* deletes margin on top or bottom of the a tag*/
+    div#menu a {
+        display: block;
     }
         
 }
