@@ -345,7 +345,7 @@ div#menu {
   background-color: #333;
   opacity: 0.7;
   overflow: hidden;
-  
+  z-index: 99;
 }
 
 div#menu a {
