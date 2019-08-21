@@ -356,7 +356,7 @@ div#menu a {
   text-decoration: none;
   text-align: center;
   text-decoration: none;
-  float: right;
+  float: left;
 }
 
 div#menu a:hover {
