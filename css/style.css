@@ -94,7 +94,7 @@ body {
 
 .content {
     float: left;
-    width: 300px;
+    width: 250px;
 }
     .bio {
         text-align:justify;
@@ -154,30 +154,25 @@ body {
                 width: 32px;
                 height: 32px;
             }
-            .facebook {
-                background-image: url(../img/facebook.png);
-                width: 10px;
-                height: 19px;
+            .academia {
+                background-image: url(../img/academia.png);
+                width: 32px;
+                height: 32px;
             }
-            .googleplus {
-                background-image: url(../img/googleplus.png);
-                width: 21px;
-                height: 19px;
+            .googlescholar {
+                background-image: url(../img/googlescholar.png);
+                width: 32px;
+                height: 32px;
             }
-            .dribbble {
-                background-image: url(../img/dribbble.png);
-                width: 21px;
-                height: 19px;
+            .publons {
+                background-image: url(../img/publons.png);
+                width: 32px;
+                height: 32px;
             }
-            .instagram {
-                background-image: url(../img/instagram.png);
-                width: 20px;
-                height: 19px;
-            }
-            .flickr {
-                background-image: url(../img/flickr.png);
-                width: 20px;
-                height: 9px;
+            .researchgate {
+                background-image: url(../img/researchgate.png);
+                width: 32px;
+                height: 32px;
             }
 
 
