@@ -1,0 +1,1304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Branislava Šandrih Todorović — Computational Linguist</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #faf6f1;
+      --bg-warm: #f3ebe0;
+      --paper: #fffdf9;
+      --ink: #2a2520;
+      --ink-soft: #5a544c;
+      --ink-muted: #8a8278;
+      --accent: #b85a3e;        /* warm terracotta */
+      --accent-soft: #d99878;
+      --accent-bg: #f7e7dc;
+      --moss: #5a7a4e;          /* warm green */
+      --gold: #c9954a;
+      --border: #e7dccd;
+      --shadow: 0 1px 2px rgba(58,42,28,.04), 0 8px 24px rgba(58,42,28,.06);
+      --shadow-lg: 0 4px 8px rgba(58,42,28,.06), 0 24px 48px rgba(58,42,28,.10);
+      --radius: 14px;
+      --radius-sm: 8px;
+      --serif: "Fraunces", Georgia, serif;
+      --sans: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+      --mono: "JetBrains Mono", ui-monospace, monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.65;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* Decorative grain / noise overlay */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      opacity: .35;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.16 0 0 0 0 0.13 0 0 0 0 0.1 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    /* ── STICKY NAV ─────────────────────────────────────────────── */
+    nav.sticky {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(250, 246, 241, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 0;
+    }
+    nav .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+    }
+    nav .brand {
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: 17px;
+      color: var(--ink);
+      letter-spacing: -.01em;
+      font-style: italic;
+    }
+    nav .brand strong { font-style: normal; font-weight: 600; }
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 4px;
+      flex-wrap: wrap;
+    }
+    nav ul a {
+      color: var(--ink-soft);
+      text-decoration: none;
+      font-size: 13.5px;
+      font-weight: 500;
+      padding: 7px 12px;
+      border-radius: 999px;
+      transition: all .25s ease;
+      letter-spacing: -.005em;
+    }
+    nav ul a:hover {
+      color: var(--accent);
+      background: var(--accent-bg);
+    }
+
+    /* ── LAYOUT ──────────────────────────────────────────────────── */
+    main {
+      position: relative;
+      z-index: 2;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 100px 32px 80px;
+    }
+    section {
+      padding: 60px 0;
+      border-bottom: 1px dashed var(--border);
+    }
+    section:last-of-type { border-bottom: none; }
+
+    .eyebrow {
+      font-family: var(--mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 16px;
+      display: inline-block;
+    }
+    h2.section-title {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(28px, 4vw, 40px);
+      line-height: 1.15;
+      letter-spacing: -.02em;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+    h2.section-title em {
+      font-style: italic;
+      color: var(--accent);
+      font-weight: 500;
+    }
+    .section-lede {
+      color: var(--ink-soft);
+      font-size: 17px;
+      max-width: 620px;
+      margin-bottom: 40px;
+    }
+
+    a { color: var(--accent); text-decoration: none; transition: all .2s ease; }
+    a:hover { color: var(--ink); }
+
+    /* ── HERO ────────────────────────────────────────────────────── */
+    .hero {
+      padding: 60px 0 80px;
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: 60px;
+      align-items: center;
+      border-bottom: 1px dashed var(--border);
+    }
+    .hero-text { animation: fadeUp .9s ease both; }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .hero h1 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(40px, 6.5vw, 68px);
+      line-height: 1.02;
+      letter-spacing: -.035em;
+      color: var(--ink);
+      margin-bottom: 24px;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent);
+      font-weight: 500;
+    }
+    .hero .tagline {
+      font-size: 18px;
+      color: var(--ink-soft);
+      margin-bottom: 28px;
+      max-width: 540px;
+      line-height: 1.55;
+    }
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      background: var(--paper);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      font-size: 13px;
+      color: var(--ink-soft);
+      font-weight: 500;
+    }
+    .pill .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--moss);
+    }
+    .hero-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .hero-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 9px 16px;
+      background: var(--paper);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      font-size: 14px;
+      color: var(--ink);
+      font-weight: 500;
+    }
+    .hero-links a:hover {
+      border-color: var(--accent);
+      background: var(--accent-bg);
+      color: var(--accent);
+      transform: translateY(-1px);
+    }
+    .hero-links a.primary {
+      background: var(--ink);
+      color: var(--bg);
+      border-color: var(--ink);
+    }
+    .hero-links a.primary:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--paper);
+    }
+
+    .hero-photo {
+      position: relative;
+      animation: fadeUp 1.1s ease .15s both;
+    }
+    .hero-photo .photo-frame {
+      position: relative;
+      width: 280px;
+      height: 320px;
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--bg-warm);
+      box-shadow: var(--shadow-lg);
+      transform: rotate(-1.5deg);
+    }
+    .hero-photo .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: contrast(1.02) saturate(.9);
+    }
+    .hero-photo::before {
+      content: "";
+      position: absolute;
+      top: -14px; right: -14px;
+      width: 280px; height: 320px;
+      border: 1.5px solid var(--accent);
+      border-radius: 12px;
+      transform: rotate(2deg);
+      z-index: -1;
+      opacity: .6;
+    }
+
+    /* ── ABOUT ─────────────────────────────────────────────────── */
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: 60px;
+      align-items: start;
+    }
+    .about-prose {
+      font-size: 17px;
+      line-height: 1.75;
+      color: var(--ink-soft);
+    }
+    .about-prose p { margin-bottom: 18px; }
+    .about-prose p:first-of-type::first-letter {
+      font-family: var(--serif);
+      font-size: 56px;
+      font-weight: 500;
+      float: left;
+      line-height: .9;
+      padding: 6px 10px 0 0;
+      color: var(--accent);
+    }
+    .about-prose a {
+      color: var(--ink);
+      border-bottom: 1px solid var(--accent-soft);
+      font-weight: 500;
+    }
+    .about-prose a:hover {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+    .about-side {
+      position: sticky;
+      top: 100px;
+    }
+    .info-card {
+      background: var(--paper);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 16px;
+    }
+    .info-card h4 {
+      font-family: var(--mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      color: var(--accent);
+      margin-bottom: 12px;
+      font-weight: 500;
+    }
+    .info-card .role {
+      font-family: var(--serif);
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--ink);
+      line-height: 1.3;
+      margin-bottom: 4px;
+    }
+    .info-card .org {
+      font-size: 14px;
+      color: var(--ink-soft);
+      margin-bottom: 8px;
+    }
+    .info-card .period {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--ink-muted);
+    }
+    .info-card .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 16px 0;
+    }
+
+    /* ── INTERESTS / TAGS ───────────────────────────────────────── */
+    .interest-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .interest-tags .tag {
+      font-size: 13px;
+      padding: 6px 13px;
+      background: var(--accent-bg);
+      color: var(--accent);
+      border-radius: 999px;
+      font-weight: 500;
+      border: 1px solid transparent;
+      transition: all .2s ease;
+    }
+    .interest-tags .tag:hover {
+      border-color: var(--accent);
+      background: var(--paper);
+    }
+
+    /* ── EDUCATION TIMELINE ─────────────────────────────────────── */
+    .timeline {
+      position: relative;
+      padding-left: 32px;
+      max-width: 760px;
+    }
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 9px;
+      top: 12px;
+      bottom: 12px;
+      width: 1.5px;
+      background: linear-gradient(to bottom, var(--accent-soft), var(--border));
+    }
+    .timeline-item {
+      position: relative;
+      padding-bottom: 32px;
+    }
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -28px;
+      top: 7px;
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: var(--paper);
+      border: 2px solid var(--accent);
+    }
+    .timeline-item .year {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--accent);
+      letter-spacing: .05em;
+      margin-bottom: 4px;
+    }
+    .timeline-item .ti-title {
+      font-family: var(--serif);
+      font-size: 19px;
+      font-weight: 500;
+      color: var(--ink);
+      line-height: 1.3;
+      margin-bottom: 4px;
+    }
+    .timeline-item .ti-title a { color: var(--ink); border-bottom: 1px solid transparent; }
+    .timeline-item .ti-title a:hover { color: var(--accent); border-bottom-color: var(--accent-soft); }
+    .timeline-item .ti-meta {
+      font-size: 14px;
+      color: var(--ink-soft);
+      font-style: italic;
+    }
+
+    /* ── PUBLICATIONS ───────────────────────────────────────────── */
+    .pub-group { margin-bottom: 40px; }
+    .pub-group-title {
+      font-family: var(--mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      color: var(--moss);
+      margin-bottom: 18px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+      font-weight: 500;
+    }
+    .pub {
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 60px 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+    .pub:last-child { border-bottom: none; }
+    .pub .pub-year {
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--accent);
+      font-weight: 500;
+      padding-top: 2px;
+    }
+    .pub .pub-body {
+      font-size: 14.5px;
+      line-height: 1.6;
+      color: var(--ink-soft);
+    }
+    .pub .pub-body strong {
+      font-weight: 600;
+      color: var(--ink);
+    }
+    .pub .pub-body em {
+      font-style: italic;
+      color: var(--ink);
+    }
+    .pub .pub-body .venue {
+      color: var(--ink-muted);
+      font-size: 13.5px;
+    }
+    .pub .pub-body a.url {
+      display: inline-block;
+      margin-left: 6px;
+      font-family: var(--mono);
+      font-size: 11px;
+      padding: 2px 8px;
+      background: var(--accent-bg);
+      color: var(--accent);
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      font-weight: 500;
+      vertical-align: middle;
+    }
+    .pub .pub-body a.url:hover {
+      background: var(--accent);
+      color: var(--paper);
+    }
+
+    /* ── PROJECTS GRID ──────────────────────────────────────────── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 18px;
+    }
+    .card {
+      background: var(--paper);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      transition: all .3s ease;
+      display: block;
+      color: var(--ink);
+      position: relative;
+      overflow: hidden;
+    }
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--accent-bg) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity .3s ease;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent-soft);
+      box-shadow: var(--shadow-lg);
+    }
+    .card:hover::before { opacity: .6; }
+    .card > * { position: relative; }
+    .card .card-tag {
+      font-family: var(--mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    .card h3 {
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: 19px;
+      line-height: 1.25;
+      margin-bottom: 8px;
+      letter-spacing: -.01em;
+    }
+    .card p {
+      font-size: 14px;
+      color: var(--ink-soft);
+      line-height: 1.55;
+    }
+    .card .arrow {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      color: var(--ink-muted);
+      transition: all .25s ease;
+    }
+    .card:hover .arrow {
+      color: var(--accent);
+      transform: translate(2px, -2px);
+    }
+
+    /* ── WORK ────────────────────────────────────────────────────── */
+    .work-block {
+      background: var(--paper);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px;
+      margin-bottom: 16px;
+    }
+    .work-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 6px;
+      flex-wrap: wrap;
+    }
+    .work-block .w-role {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 500;
+      color: var(--ink);
+    }
+    .work-block .w-period {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--accent);
+      letter-spacing: .04em;
+      white-space: nowrap;
+    }
+    .work-block .w-org {
+      font-size: 14.5px;
+      color: var(--ink-soft);
+      margin-bottom: 16px;
+      font-style: italic;
+    }
+    .work-block .w-courses {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 6px 16px;
+      margin-top: 8px;
+      font-size: 13.5px;
+      color: var(--ink-soft);
+    }
+    .work-block .w-courses li {
+      list-style: none;
+      padding-left: 14px;
+      position: relative;
+    }
+    .work-block .w-courses li::before {
+      content: "·";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* ── SUPERVISION / OTHER LISTS ───────────────────────────────── */
+    .clean-list {
+      list-style: none;
+    }
+    .clean-list li {
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 14.5px;
+      color: var(--ink-soft);
+      line-height: 1.55;
+    }
+    .clean-list li:last-child { border-bottom: none; }
+    .clean-list li strong { color: var(--ink); font-weight: 600; }
+
+    .sub-title {
+      font-family: var(--mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      color: var(--moss);
+      margin: 32px 0 12px;
+      font-weight: 500;
+    }
+    .sub-title:first-child { margin-top: 0; }
+
+    /* ── PERSONAL ────────────────────────────────────────────────── */
+    .personal {
+      background: linear-gradient(135deg, var(--accent-bg) 0%, var(--bg-warm) 100%);
+      border-radius: var(--radius);
+      padding: 40px;
+      text-align: center;
+      border: 1px solid var(--border);
+    }
+    .personal h2 { color: var(--ink); margin-bottom: 16px; }
+    .personal p {
+      font-family: var(--serif);
+      font-size: 18px;
+      font-style: italic;
+      color: var(--ink-soft);
+      max-width: 600px;
+      margin: 0 auto 8px;
+      line-height: 1.55;
+    }
+    .personal .names {
+      font-family: var(--serif);
+      color: var(--accent);
+      font-weight: 500;
+      font-style: normal;
+    }
+    .personal .hearts {
+      margin-top: 14px;
+      font-size: 20px;
+      letter-spacing: 4px;
+    }
+
+    /* ── FOOTER ──────────────────────────────────────────────────── */
+    footer {
+      text-align: center;
+      padding: 40px 32px 24px;
+      color: var(--ink-muted);
+      font-size: 13px;
+      position: relative;
+      z-index: 2;
+    }
+    footer .heart { color: var(--accent); }
+
+    /* ── RESPONSIVE ──────────────────────────────────────────────── */
+    @media (max-width: 860px) {
+      .hero { grid-template-columns: 1fr; gap: 40px; }
+      .hero-photo { order: -1; max-width: 240px; }
+      .hero-photo .photo-frame { width: 240px; height: 280px; }
+      .hero-photo::before { width: 240px; height: 280px; }
+      .about-content { grid-template-columns: 1fr; gap: 32px; }
+      .about-side { position: static; }
+      nav .nav-inner { padding: 0 20px; }
+      nav ul { gap: 0; }
+      nav ul a { padding: 6px 9px; font-size: 12.5px; }
+      main { padding: 90px 20px 60px; }
+      .work-block { padding: 24px; }
+      .pub { grid-template-columns: 50px 1fr; gap: 14px; }
+    }
+    @media (max-width: 560px) {
+      nav .brand { font-size: 14px; }
+      nav .brand .last-name { display: none; }
+      .hero h1 { font-size: 38px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── STICKY NAV ─────────────────────────────────────────────── -->
+  <nav class="sticky">
+    <div class="nav-inner">
+      <div class="brand"><strong>Branislava</strong> <span class="last-name">Šandrih Todorović</span></div>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#research">Research</a></li>
+        <li><a href="#publications">Publications</a></li>
+        <li><a href="#lab">Lab</a></li>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#mentorship">Mentorship</a></li>
+        <li><a href="#service">Service</a></li>
+        <li><a href="#personal">Personal</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ── HERO ─────────────────────────────────────────────────── -->
+    <section class="hero" id="top" style="border-top: none; padding-top: 40px;">
+      <div class="hero-text">
+        <span class="eyebrow">Dr. Branislava Šandrih Todorović</span>
+        <h1>Building <em>language</em><br>technology for the<br>under-resourced.</h1>
+        <p class="tagline">Computational linguist and data scientist. Ten years building NLP tools, corpora, and models for Serbian, Slovenian, and other South Slavic languages — bridging rigorous linguistic methodology with modern deep learning.</p>
+        <div class="hero-meta">
+          <span class="pill"><span class="dot"></span> Belgrade, Serbia</span>
+          <span class="pill">PhD, Computer Science</span>
+          <span class="pill">30+ publications</span>
+        </div>
+        <div class="hero-links">
+          <a href="mailto:branislava.sandrih@gmail.com" class="primary">✉ Get in touch</a>
+          <a href="Branislava_Sandrih_Todorovic_CV.pdf" target="_blank">Download CV</a>
+          <a href="https://scholar.google.com/citations?user=7DxZ1TgAAAAJ" target="_blank">Scholar</a>
+          <a href="https://github.com/Branislava/" target="_blank">GitHub</a>
+          <a href="https://www.linkedin.com/in/branislavasandrih/" target="_blank">LinkedIn</a>
+        </div>
+      </div>
+      <div class="hero-photo">
+        <div class="photo-frame">
+          <img src="img/photo.jpg" alt="Branislava Šandrih Todorović">
+        </div>
+      </div>
+    </section>
+
+    <!-- ── ABOUT ────────────────────────────────────────────────── -->
+    <section id="about">
+      <span class="eyebrow">About</span>
+      <h2 class="section-title">A computational linguist <em>at the intersection</em> of research & industry.</h2>
+      <div class="about-content">
+        <div class="about-prose">
+          <p>Dr. Branislava Šandrih Todorović is a Senior Data Scientist at <a href="https://www.nlbdigit.rs/" target="_blank">NLB DigIT</a>, working as an NLP expert in close collaboration with the Center of Excellence within <a href="https://www.nlb.si/" target="_blank">NLB Bank</a> in Ljubljana. She received her PhD at the University of Belgrade, Faculty of Mathematics in 2020 (<a href="https://www.academia.edu/43961177/IMPACT_OF_TEXT_CLASSIFICATION_ON_NATURAL_LANGUAGE_PROCESSING_APPLICATIONS" target="_blank">Impact of Text Classification on Natural Language Processing Applications</a>).</p>
+          <p>Her fields of research are machine learning and deep learning applied to the development of tools, resources, and models for the <a href="http://portal.jerteh.rs" target="_blank">Serbian</a> and Slovenian languages — from corpus construction and pre-training BERT and GPT-style models, to named entity recognition, terminology extraction, sentiment analysis, and authorship identification. She has published more than 30 papers in journals and proceedings of scientific conferences.</p>
+          <p>Until 2022, Branislava was engaged as <a href="http://rgcl.wlv.ac.uk/people/" target="_blank">a visiting researcher</a> at the Research Group in Computational Linguistics at Wolverhampton University, <a href="https://www.cambridge.org/core/journals/natural-language-engineering/information/editorial-board" target="_blank">Editorial Administrator</a> for the Journal of Natural Language Engineering, and <a href="http://infoteka.bg.ac.rs/index.php/en/r-d-ci" target="_blank">Editor in Chief</a> of the Journal of Digital Humanities Infotheca. She is a member of the Society for Language Resources and Technologies <a href="http://jerteh.rs?lang=en" target="_blank">JeRTeh</a>.</p>
+          <p>Branislava has developed several NLP tools and established international connections through European projects (COST actions <strong>CA18231</strong>, <strong>CA16204</strong>, <strong>CA16105</strong>). During her PhD she attended summer schools on NLP and machine learning: <a href="http://lxmls.it.pt/2018/" target="_blank">LxMLS 2018</a>, <a href="http://esslli2018.folli.info/" target="_blank">ESSLLI 2018</a>, and <a href="https://dlinnlp.github.io/" target="_blank">DLinNLP 2019</a>.</p>
+          <p>In 2021, she received the <a href="http://www.mi.sanu.ac.rs/novi_sajt/aboutus/student.php" target="_blank">Annual Award of the Mathematical Institute of the Serbian Academy of Sciences and Arts</a> in the field of computing for PhD students.</p>
+        </div>
+        <aside class="about-side">
+          <div class="info-card">
+            <h4>Currently</h4>
+            <div class="role">Senior Data Scientist</div>
+            <div class="org">NLB DigIT, Belgrade</div>
+            <div class="period">2022 – 2023 · 2025 – present</div>
+            <div class="divider"></div>
+            <h4>Education</h4>
+            <div class="role" style="font-size:16px">PhD Computer Science</div>
+            <div class="org">University of Belgrade, 2020</div>
+            <div class="period">summa cum laude</div>
+          </div>
+          <div class="info-card">
+            <h4>Research Interests</h4>
+            <div class="interest-tags">
+              <span class="tag">NLP</span>
+              <span class="tag">Computational Linguistics</span>
+              <span class="tag">Deep Learning</span>
+              <span class="tag">NER</span>
+              <span class="tag">Terminology Extraction</span>
+              <span class="tag">Machine Translation</span>
+              <span class="tag">Sentiment Analysis</span>
+              <span class="tag">Corpus Filtering</span>
+              <span class="tag">Authorship ID</span>
+              <span class="tag">Dictionary Examples</span>
+              <span class="tag">Serbian & Slovenian</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ── RESEARCH (EDUCATION) ─────────────────────────────────── -->
+    <section id="research">
+      <span class="eyebrow">Education & Training</span>
+      <h2 class="section-title">A long path <em>through mathematics</em> and language.</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="year">2015 – 2020</div>
+          <div class="ti-title"><a href="http://www.math.rs/eng/m/100/doktor-phd---informatics/" target="_blank">Doctor of Computer Science</a></div>
+          <div class="ti-meta">Faculty of Mathematics, University of Belgrade — Department of Computer Science and Informatics</div>
+        </div>
+        <div class="timeline-item">
+          <div class="year">2014 – 2015</div>
+          <div class="ti-title"><a href="http://www.math.rs/eng/cp/38/master-studies---mathematics-p--module-computer-science-and-informatics--p-/" target="_blank">MSc Mathematics</a> <span style="font-weight:400; color:var(--ink-muted); font-size:14px">— magna cum laude, 9.81/10</span></div>
+          <div class="ti-meta">Faculty of Mathematics, University of Belgrade</div>
+        </div>
+        <div class="timeline-item">
+          <div class="year">2010 – 2014</div>
+          <div class="ti-title"><a href="http://www.matf.bg.ac.rs/eng/cp/28/bachelor-studies---mathematics--p-module-computer-science-and-informatics--p-/" target="_blank">BSc Mathematics</a> <span style="font-weight:400; color:var(--ink-muted); font-size:14px">— magna cum laude, 9.48/10</span></div>
+          <div class="ti-meta">Faculty of Mathematics, University of Belgrade</div>
+        </div>
+        <div class="timeline-item">
+          <div class="year">2006 – 2010</div>
+          <div class="ti-title"><a href="https://teslinkorakdalje.wordpress.com/2016/12/03/uzivam-u-radu-sa-pametnim-mladim-ljudima-koji-su-vredni-motivisani-puni-dobre-volje-dobrih-ideja-ali-i-dobrog-smisla-za-humor-branislava-sandrih/" target="_blank">Electrotechnician of Computing</a></div>
+          <div class="ti-meta">School of Electrotechnics “Nikola Tesla”, Pančevo</div>
+        </div>
+      </div>
+
+      <h3 class="sub-title">Summer Schools & Seminars</h3>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="year">2019</div>
+          <div class="ti-title"><a href="https://dlinnlp.github.io/" target="_blank">DLinNLP 2019</a></div>
+          <div class="ti-meta">Summer School on Deep Learning in Natural Language Processing</div>
+        </div>
+        <div class="timeline-item">
+          <div class="year">2018</div>
+          <div class="ti-title"><a href="http://esslli2018.folli.info/" target="_blank">ESSLLI 2018</a></div>
+          <div class="ti-meta">30th European Summer School in Logic, Language and Information</div>
+        </div>
+        <div class="timeline-item">
+          <div class="year">2018</div>
+          <div class="ti-title"><a href="http://lxmls.it.pt/2018/" target="_blank">LxMLS 2018</a></div>
+          <div class="ti-meta">8th Lisbon Machine Learning School</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── PUBLICATIONS ─────────────────────────────────────────── -->
+    <section id="publications">
+      <span class="eyebrow">Publications</span>
+      <h2 class="section-title">30+ <em>peer-reviewed</em> works.</h2>
+      <p class="section-lede">Spanning journals, conference proceedings, books, and a PhD thesis — with focus on Serbian & Slovenian language resources, terminology, NER, and text classification.</p>
+
+      <div class="pub-group">
+        <h3 class="pub-group-title">Articles in Journals</h3>
+
+        <div class="pub">
+          <div class="pub-year">2022</div>
+          <div class="pub-body">Erdem, Erkut, et al. (incl. <strong>Branislava Šandrih</strong>). <em>Neural Natural Language Generation: A Survey on Multilinguality, Multimodality, Controllability and Learning.</em> <span class="venue">Journal of Artificial Intelligence Research, 73: 1131–1207.</span> <a class="url" href="https://jair.org/index.php/jair/article/view/12918" target="_blank">URL</a></div>
+        </div>
+
+        <div class="pub">
+          <div class="pub-year">2022</div>
+          <div class="pub-body">Ranka Stanković, Mihailo Škorić, and <strong>Branislava Šandrih Todorović</strong>. <em>Parallel Bidirectionally Pretrained Taggers as Feature Generators.</em> <span class="venue">Applied Sciences, 12(10): 5028.</span> <a class="url" href="https://doi.org/10.3390/app12105028" target="_blank">URL</a></div>
+        </div>
+
+        <div class="pub">
+          <div class="pub-year">2022</div>
+          <div class="pub-body">Tanja Ivanović, Ranka Stanković, <strong>Branislava Šandrih Todorović</strong>, and Cvetana Krstev. <em>Corpus-Based Bilingual Terminology Extraction in Power Engineering Domain.</em> <span class="venue">Terminology — International Journal of Theoretical and Applied Issues in Specialized Communication.</span> <a class="url" href="https://www.doi.org/10.1075/term.20038.iva" target="_blank">URL</a></div>
+        </div>
+
+        <div class="pub">
+          <div class="pub-year">2021</div>
+          <div class="pub-body">Ranka Stanković, Cvetana Krstev, <strong>Branislava Šandrih Todorović</strong>, and Mihailo Škorić. <em>Annotation of the Serbian ELTeC Collection.</em> <span class="venue">Infotheca, 21(2): 43–59.</span> <a class="url" href="https://doi.org/10.18485/infotheca.2021.21.2.3" target="_blank">URL</a></div>
+        </div>
+
+        <div class="pub">
+          <div class="pub-year">2021</div>
+          <div class="pub-body">Данило Алексић и <strong>Бранислава Шандрих</strong>. <em>Аутоматска ексцерпција парова речи за учење изговора у настави српског као страног језика.</em> <span class="venue">Српски језик, 26(1): 567–584.</span> <a class="url" href="https://doi.org/10.18485/sj.2021.26.1.32" target="_blank">URL</a></div>
+        </div>
+
+        <div class="pub">
+          <div class="pub-year">2020</div>
+          <div class="pub-body"><strong>Branislava Šandrih</strong>, Cvetana Krstev, and Ranka Stanković. <em>Two Approaches to Compilation of Bilingual Multi-Word Terminology Lists from Lexical Resources.</em> <span class="venue">Natural Language Engineering, 26(4): 455–479.</span> <a class="url" href="https://www.doi.org/10.1017/S1351324919000615" target="_blank">URL</a></div>
+        </div>
+
+        <div class="pub">
+          <div class="pub-year">2019</div>
+          <div class="pub-body"><strong>Branislava Šandrih</strong> and Ranka Stanković. <em>Extraction of Bilingual Terminology using Graphs, Dictionaries and GIZA++.</em> <span class="venue">Infotheca, 19(2).</span> <a class="url" href="https://infoteka.bg.ac.rs/ojs/index.php/Infoteka/article/view/2019.19.2.6_en" target="_blank">URL</a></div>
+        </div>
+
+        <div class="pub">
+          <div class="pub-year">2019</div>
+          <div class="pub-body">Jelena Andonovski, <strong>Branislava Šandrih</strong>, and Olivera Kitanović. <em>Bilingual Lexical Extraction Based on Word Alignment for Improving Corpus Search.</em> <span class="venue">The Electronic Library, 37(2).</span> <a class="url" href="https://www.doi.org/10.1108/EL-03-2019-0056" target="_blank">URL</a></div>
+        </div>
+
+        <div class="pub">
+          <div class="pub-year">2019</div>
+          <div class="pub-body"><strong>Branislava Šandrih</strong>. <em>SMS Sentiment Classification based on Lexical Features, Emoticons and Informal Abbreviations.</em> <span class="venue">Serdica Journal of Computing, 13(1-2).</span> <a class="url" href="http://serdica-comp.math.bas.bg/index.php/serdicajcomputing/article/view/341" target="_blank">URL</a></div>
+        </div>
+
+        <div class="pub">
+          <div class="pub-year">2018</div>
+          <div class="pub-body"><strong>Branislava Šandrih</strong>. <em>Informatics for Library and Information Science students with special focus on Python.</em> <span class="venue">Infotheca, 18(1): 63–77.</span> <a class="url" href="http://infoteka.bg.ac.rs/pdf/Srp/2018/infoteka-2018-18-1-4.pdf" target="_blank">URL</a></div>
+        </div>
+
+        <div class="pub">
+          <div class="pub-year">2017</div>
+          <div class="pub-body"><strong>Branislava Šandrih</strong>, Dušan Tošić, and Vladimir Filipović. <em>Towards Efficient and Unified XML/JSON Conversion — a New Conversion Method.</em> <span class="venue">Transactions on Internet Research, 13(1): 58–64.</span> <a class="url" href="http://ipsitransactions.org/journals/papers/tir/2017jan/fullPaper.pdf" target="_blank">URL</a></div>
+        </div>
+
+        <div class="pub">
+          <div class="pub-year">2017</div>
+          <div class="pub-body"><strong>Branislava Šandrih</strong>, Vladimir Filipović, Saša Malkov, and Aleksandar Kartelj. <em>Distributed Computing Among Independent Web Browsers Applied to Text and Image Processing.</em> <span class="venue">Review of the National Center for Digitization, 31: 30–39.</span> <a class="url" href="http://www.ncd.matf.bg.ac.rs/issues/31/NCD31030.pdf" target="_blank">URL</a></div>
+        </div>
+      </div>
+
+      <div class="pub-group">
+        <h3 class="pub-group-title">PhD Thesis</h3>
+        <div class="pub">
+          <div class="pub-year">2020</div>
+          <div class="pub-body"><strong>Branislava Šandrih</strong>. <em>Impact of Text Classification on Natural Language Processing Applications.</em> <span class="venue">PhD thesis, University of Belgrade, Faculty of Mathematics.</span> <a class="url" href="https://www.academia.edu/43961177/IMPACT_OF_TEXT_CLASSIFICATION_ON_NATURAL_LANGUAGE_PROCESSING_APPLICATIONS" target="_blank">URL</a></div>
+        </div>
+      </div>
+
+      <div class="pub-group">
+        <h3 class="pub-group-title">Conference Proceedings</h3>
+
+        <div class="pub">
+          <div class="pub-year">2024</div>
+          <div class="pub-body">Danka Jokić, Ranka Stanković, and <strong>Branislava Šandrih Todorović</strong>. <em>Abusive Speech Detection in Serbian using Machine Learning.</em> <span class="venue">NLP&AI for Cyber Security, Lancaster.</span> <a class="url" href="https://aclanthology.org/2024.nlpaics-1.18/" target="_blank">URL</a></div>
+        </div>
+
+        <div class="pub">
+          <div class="pub-year">2023</div>
+          <div class="pub-body">Цветана Крстев, Ранка Станковић, <strong>Бранислава Шандрих Тодоровић</strong>, Милица Иконић Нешић. <em>Нове технологије за оживљавање старих текстова.</em> <span class="venue">Digital Humanities & Slavic Cultural Heritage II, pp. 79–96.</span> <a class="url" href="https://ssds.org.rs/wp-content/uploads/2023/11/Zbornik-radova-DHSKN-2023.pdf" target="_blank">URL</a></div>
+        </div>
+
+        <div class="pub">
+          <div class="pub-year">2023</div>
+          <div class="pub-body"><strong>Branislava Šandrih Todorović</strong>, Katarina Josipović, and Jurij Kodre. <em>Three Approaches to Client Email Topic Classification.</em> <span class="venue">RANLP 2023.</span> <a class="url" href="https://doi.org/10.26615/978-954-452-092-2_109" target="_blank">URL</a></div>
+        </div>
+
+        <div class="pub">
+          <div class="pub-year">2022</div>
+          <div class="pub-body">Ranka Stanković, Cvetana Krstev, <strong>Branislava Šandrih Todorović</strong>, Duško Vitas, Mihailo Škorić, and Milica Ikonić Nešić. <em>Distant Reading in Digital Humanities: Case Study on the Serbian Part of the ELTeC Collection.</em> <span class="venue">LREC 2022, Marseille.</span> <a class="url" href="https://aclanthology.org/2022.lrec-1.356.pdf" target="_blank">URL</a></div>
+        </div>
+
+        <div class="pub">
+          <div class="pub-year">2021</div>
+          <div class="pub-body">Rina Zviel-Girshin et al. (incl. <strong>Branislava Šandrih Todorović</strong>). <em>Developing Pedagogically Appropriate Language Corpora through Crowdsourcing and Gamification.</em> <span class="venue">EUROCALL 2021.</span> <a class="url" href="https://doi.org/10.14705/rpnet.2021.54.1352" target="_blank">URL</a></div>
+        </div>
+
+        <div class="pub">
+          <div class="pub-year">2021</div>
+          <div class="pub-body">Danka Jokić, Ranka Stanković, Cvetana Krstev, and <strong>Branislava Šandrih</strong>. <em>A Twitter Corpus and Lexicon for Abusive Speech Detection in Serbian.</em> <span class="venue">LDK 2021, Dagstuhl.</span> <a class="url" href="https://drops.dagstuhl.de/opus/volltexte/2021/14549" target="_blank">URL</a></div>
+        </div>
+
+        <div class="pub">
+          <div class="pub-year">2021</div>
+          <div class="pub-body"><strong>Branislava Šandrih Todorović</strong>, Cvetana Krstev, Ranka Stanković, and Milica Ikonić Nešić. <em>Serbian NER&Beyond: The Archaic and the Modern Intertwined.</em> <span class="venue">RANLP 2021.</span> <a class="url" href="https://doi.org/10.26615/978-954-452-072-4_141" target="_blank">URL</a></div>
+        </div>
+
+        <div class="pub">
+          <div class="pub-year">2020</div>
+          <div class="pub-body">Ranka Stanković, <strong>Branislava Šandrih</strong>, Cvetana Krstev, Miloš Utvić, and Mihailo Škorić. <em>Machine Learning and Deep Neural Network-Based Lemmatization and Morphosyntactic Tagging for Serbian.</em> <span class="venue">LREC 2020, Marseille.</span> <a class="url" href="https://www.aclweb.org/anthology/2020.lrec-1.487" target="_blank">URL</a></div>
+        </div>
+
+        <div class="pub">
+          <div class="pub-year">2019</div>
+          <div class="pub-body">Cvetana Krstev, Jelena Jaćimović, <strong>Branislava Šandrih</strong>, and Ranka Stanković. <em>Analysis of the First Serbian Literature Corpus of the Late 19th and Early 20th Century with the TXM Platform.</em> <span class="venue">DH_Budapest 2019.</span> <a class="url" href="http://elte-dh.hu/wp-content/uploads/2019/09/DH_BP_2019-Abstract-Booklet.pdf" target="_blank">URL</a></div>
+        </div>
+
+        <div class="pub">
+          <div class="pub-year">2019</div>
+          <div class="pub-body">Ranka Stanković, <strong>Branislava Šandrih</strong>, Rada Stijović, Cvetana Krstev, Duško Vitas, and Aleksandra Marković. <em>SASA Dictionary as the Gold Standard for Good Dictionary Examples for Serbian.</em> <span class="venue">eLex 2019, Sintra.</span> <a class="url" href="https://elex.link/elex2019/wp-content/uploads/2019/09/eLex_2019_14.pdf" target="_blank">URL</a></div>
+        </div>
+
+        <div class="pub">
+          <div class="pub-year">2019</div>
+          <div class="pub-body"><strong>Branislava Šandrih</strong>, Cvetana Krstev, and Ranka Stanković. <em>Development and Evaluation of Three Named Entity Recognition Systems for Serbian — The Case of Personal Names.</em> <span class="venue">RANLP 2019.</span> <a class="url" href="https://doi.org/10.26615/978-954-452-056-4_122" target="_blank">URL</a></div>
+        </div>
+
+        <div class="pub">
+          <div class="pub-year">2019</div>
+          <div class="pub-body"><strong>Бранислава Шандрих</strong>, Ранка Станковић, Мирјана Гочанин. <em>Чији је пример? Анализа лексичких обележја на примерима Речника САНУ.</em> <span class="venue">Међународни славистички центар, 48(3): 299–316.</span> <a class="url" href="https://doi.org/10.18485/msc.2019.48.3.ch13" target="_blank">URL</a></div>
+        </div>
+
+        <div class="pub">
+          <div class="pub-year">2018</div>
+          <div class="pub-body"><strong>Branislava Šandrih</strong>. <em>Fingerprints in SMS Messages: Automatic Recognition of a Short Message Sender Using Gradient Boosting.</em> <span class="venue">CLIB 2018, Sofia.</span> <a class="url" href="http://dcl.bas.bg/clib/wp-content/uploads/2018/05/CLIB_2018_Proceedings_v1.pdf" target="_blank">URL</a></div>
+        </div>
+
+        <div class="pub">
+          <div class="pub-year">2018</div>
+          <div class="pub-body"><strong>Бранислава Шандрих</strong> и Душко Витас. <em>Квантитативни преглед језика кратких порука.</em> <span class="venue">Међународни славистички центар, 47(3): 155–165.</span> <a class="url" href="https://doi.org/10.18485/msc.2018.47.3.ch10" target="_blank">URL</a></div>
+        </div>
+
+        <div class="pub">
+          <div class="pub-year">2018</div>
+          <div class="pub-body">Cvetana Krstev, <strong>Branislava Šandrih</strong>, Ranka Stanković, and Miljana Mladenović. <em>Using English Baits to Catch Serbian Multi-Word Terminology.</em> <span class="venue">LREC 2018, Paris.</span> <a class="url" href="http://www.lrec-conf.org/proceedings/lrec2018/pdf/384.pdf" target="_blank">URL</a></div>
+        </div>
+
+        <div class="pub">
+          <div class="pub-year">2017</div>
+          <div class="pub-body">Cvetana Krstev, Duško Vitas, Miloš Utvić, and <strong>Branislava Šandrih</strong>. <em>The New Clothes for an Old Cookbook.</em> <span class="venue">LTC 2017, Poznań.</span> <a class="url" href="http://ltc.amu.edu.pl/book/papers/IRIE2-3.pdf" target="_blank">URL</a></div>
+        </div>
+
+        <div class="pub">
+          <div class="pub-year">2017</div>
+          <div class="pub-body">Ranka Stanković, <strong>Branislava Šandrih</strong>, Olivera Kitanović, Ivan Obradović, and Miloš Manić. <em>An E-Learning Approach to Social Sciences.</em> <span class="venue">eLearning 2017, Belgrade.</span> <a class="url" href="http://econference.metropolitan.ac.rs/files/Elearning-2017-final.pdf" target="_blank">URL</a></div>
+        </div>
+
+        <div class="pub">
+          <div class="pub-year">2016</div>
+          <div class="pub-body"><strong>Branislava Šandrih</strong>. <em>Mogući doprinos LaTeX-a u obrazovnom procesu.</em> <span class="venue">Slobodan softver u obrazovanju, Sremski Karlovci.</span> <a class="url" href="https://www.slideshare.net/pdisrbije/slobodan-softver-2016-zbornik-radova-30012016" target="_blank">URL</a></div>
+        </div>
+      </div>
+
+      <div class="pub-group">
+        <h3 class="pub-group-title">Proceedings & Books (Editor)</h3>
+        <div class="pub">
+          <div class="pub-year">2019</div>
+          <div class="pub-body">Venelin Kovatchev, Irina P. Temnikova, <strong>Branislava Šandrih</strong>, Ivelina Nikolova (editors). <em>Proceedings of the Student Research Workshop Associated with RANLP 2019.</em> <a class="url" href="https://dblp.org/db/conf/ranlp/ranlp2019s.html" target="_blank">URL</a></div>
+        </div>
+      </div>
+
+      <div class="pub-group">
+        <h3 class="pub-group-title">Abstracts in Books of Abstracts</h3>
+        <div class="pub">
+          <div class="pub-year">2020</div>
+          <div class="pub-body">Tanara Zingano Kuhn, <strong>Branislava Šandrih Todorović</strong>, et al. <em>Crowdsourcing Pedagogical Corpora for Lexicographical Purposes.</em> <span class="venue">EURALEX XIX.</span> <a class="url" href="https://novaresearch.unl.pt/files/33553735/EURALEX2020_BookOfAbstracts_Preview.pdf" target="_blank">URL</a></div>
+        </div>
+        <div class="pub">
+          <div class="pub-year">2021</div>
+          <div class="pub-body">Tanara Zingano Kuhn, Rina Zviel-Girshin, Špela Arhar Holdt, <strong>Branislava Šandrih Todorović</strong>, et al. <em>Gamifying the Path to Corpus-Based Pedagogical Dictionaries.</em> <span class="venue">eLex 2021.</span> <a class="url" href="https://elex.link/elex2021/book-of-abstracts" target="_blank">URL</a></div>
+        </div>
+        <div class="pub">
+          <div class="pub-year">2019</div>
+          <div class="pub-body">Peter Dekker, Tanara Zingano Kuhn, <strong>Branislava Šandrih</strong>, and Rina Zviel-Girshin. <em>Corpus Cleaning via Crowdsourcing for Developing a Learner's Dictionary.</em> <span class="venue">eLex 2019.</span> <a class="url" href="https://elex.link/elex2019/wp-content/uploads/2019/10/eLex_2019-Book_of_abstracts.pdf" target="_blank">URL</a></div>
+        </div>
+        <div class="pub">
+          <div class="pub-year">2019</div>
+          <div class="pub-body">Tanara Zingano Kuhn, Peter Dekker, <strong>Branislava Šandrih</strong>, Rina Zviel-Girshin, Špela Arhar Holdt, and Tanneke Schoonheim. <em>Crowdsourcing Corpus Cleaning for Language Learning Resource Development.</em> <span class="venue">EuroCALL 2019, p. 159.</span> <a class="url" href="https://sites.uclouvain.be/eurocall2019/wp-content/uploads/2019/08/EUROCALL-2019-Book-of-abstracts.pdf" target="_blank">URL</a></div>
+        </div>
+        <div class="pub">
+          <div class="pub-year">2018</div>
+          <div class="pub-body"><strong>Branislava Šandrih</strong>. <em>SMS Sentiment Classification based on Emoticons, Informal Abbreviations and other Text Features.</em> <span class="venue">QUALICO 2018, p. 73.</span> <a class="url" href="https://qualico2018.uni.wroc.pl/wp-content/uploads/2018/09/QUALICO-2018_Book-of-abstracts.pdf" target="_blank">URL</a></div>
+        </div>
+        <div class="pub">
+          <div class="pub-year">2017</div>
+          <div class="pub-body"><strong>Branislava Šandrih</strong>, Vladimir Filipović, Saša Malkov, and Aleksandar Kartelj. <em>Globalna izračunavanja u mreži internet pregledača – primena u obradi slika.</em> <span class="venue">NCD 2017, Belgrade.</span> <a class="url" href="http://www.ncd.matf.bg.ac.rs/conferences/ncd2017/NCD2017_Book_of_Abstracts.pdf" target="_blank">URL</a></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── LAB ──────────────────────────────────────────────────── -->
+    <section id="lab">
+      <span class="eyebrow">Lab</span>
+      <h2 class="section-title">Tools & resources <em>I've built</em>.</h2>
+      <p class="section-lede">Publicly available NLP toolkits and language resources, mostly for Serbian — built over years of research, freely usable.</p>
+      <div class="grid">
+        <a href="http://bilte.jerteh.rs/" target="_blank" class="card">
+          <div class="card-tag">Toolkit</div>
+          <h3>BiLTE</h3>
+          <p>Bilingual Domain Terminology Extraction system, building terminology lists from parallel corpora.</p>
+          <span class="arrow">↗</span>
+        </a>
+        <a href="http://nerbeyond.jerteh.rs/" target="_blank" class="card">
+          <div class="card-tag">Toolkit</div>
+          <h3>NER & Beyond</h3>
+          <p>Named Entity Recognition toolkit, with annotation, training, and evaluation in one place.</p>
+          <span class="arrow">↗</span>
+        </a>
+        <a href="http://ner.jerteh.rs/" target="_blank" class="card">
+          <div class="card-tag">Model</div>
+          <h3>spaCy NER for Serbian</h3>
+          <p>Publicly released spaCy-based Named Entity Recognition models for the Serbian language.</p>
+          <span class="arrow">↗</span>
+        </a>
+        <a href="http://gdex.jerteh.rs/" target="_blank" class="card">
+          <div class="card-tag">Tool</div>
+          <h3>Good Dictionary Examples</h3>
+          <p>Automatic extraction of pedagogically good sentence examples for dictionary entries.</p>
+          <span class="arrow">↗</span>
+        </a>
+        <a href="http://features.jerteh.rs/" target="_blank" class="card">
+          <div class="card-tag">Toolkit</div>
+          <h3>Stylometric Feature Extractor</h3>
+          <p>Authorship identification through extraction of stylometric features from text.</p>
+          <span class="arrow">↗</span>
+        </a>
+        <a href="http://kamp.jerteh.rs/" target="_blank" class="card">
+          <div class="card-tag">Tool</div>
+          <h3>KaMP</h3>
+          <p>By Danilo Aleksić — pronunciation pair extraction for teaching Serbian as a foreign language.</p>
+          <span class="arrow">↗</span>
+        </a>
+      </div>
+
+      <h3 class="sub-title" style="margin-top: 48px;">European Research Projects</h3>
+      <div class="grid">
+        <a href="https://www.cost.eu/actions/CA18231/" target="_blank" class="card">
+          <div class="card-tag">COST CA18231</div>
+          <h3>Multi³Generation</h3>
+          <p>Multi-task, Multilingual, Multi-modal Language Generation. Pan-European research network.</p>
+          <span class="arrow">↗</span>
+        </a>
+        <a href="https://www.cost.eu/actions/CA16105/" target="_blank" class="card">
+          <div class="card-tag">COST CA16105</div>
+          <h3>enetCollect</h3>
+          <p>European Network for Combining Language Learning with Crowdsourcing Techniques.</p>
+          <span class="arrow">↗</span>
+        </a>
+        <a href="https://www.cost.eu/actions/CA16204/" target="_blank" class="card">
+          <div class="card-tag">COST CA16204</div>
+          <h3>Distant Reading</h3>
+          <p>Distant Reading for European Literary History — computational analysis of literary corpora.</p>
+          <span class="arrow">↗</span>
+        </a>
+        <a href="http://e-cris.sr.cobiss.net/public/jqm/prj.aspx?lang=eng_sr&opdescr=search&opt=2&subopt=400&code1=org&code2=auto&psize=1&hits=1&page=1&count=&search_term=elektro&id=700&slng=&order_by=" target="_blank" class="card">
+          <div class="card-tag">National · ended 2019</div>
+          <h3>Serbian Language Resources</h3>
+          <p>Serbian Language and Its Resources: Theory, Description, and Applications.</p>
+          <span class="arrow">↗</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ── WORK ─────────────────────────────────────────────────── -->
+    <section id="work">
+      <span class="eyebrow">Work Experience</span>
+      <h2 class="section-title">A decade <em>across research</em> and industry.</h2>
+
+      <div class="work-block">
+        <div class="work-header">
+          <div class="w-role">Senior Data Scientist · Team Lead</div>
+          <div class="w-period">2022 — present</div>
+        </div>
+        <div class="w-org"><a href="https://www.nlbdigit.rs/" target="_blank">NLB DigIT</a>, Belgrade — closely collaborating with the Center of Excellence within <a href="https://www.nlb.si/" target="_blank">NLB Bank</a>, Ljubljana</div>
+        <p style="color:var(--ink-soft); font-size:14.5px;">NLP solutions for the bank: sentiment, topic, and priority classification for client emails (Slovenian); voice transcription & sentiment; RAG-powered knowledge bases; BERT-based QA bots; LLM-based zero-shot/few-shot/RAG evaluation pipelines; contract classification; market-risk early-warning system. Led a 10+ member data science team (2023–2025).</p>
+      </div>
+
+      <div class="work-block">
+        <div class="work-header">
+          <div class="w-role">Assistant Professor — Faculty of Philology</div>
+          <div class="w-period">2016 — 2022</div>
+        </div>
+        <div class="w-org"><a href="http://www.fil.bg.ac.rs/branislava/" target="_blank">University of Belgrade, Faculty of Philology</a></div>
+        <p style="font-size:13px; color:var(--ink-muted); font-family:var(--mono); margin-bottom:6px;">COURSES TAUGHT</p>
+        <ul class="w-courses">
+          <li>Informatics for Librarians (BSc)</li>
+          <li>Practicum of Informatics (BSc)</li>
+          <li>Digital Text (BSc)</li>
+          <li>Structure of Information (BSc)</li>
+          <li>Language Technologies (BSc)</li>
+          <li>Multimedia Documents (BSc)</li>
+          <li>Information Retrieval (BSc)</li>
+          <li>Advanced Methods in Information Retrieval (MSc)</li>
+          <li>Advanced Language Technologies (MSc)</li>
+          <li>Structuring and Management of Web Content (MSc)</li>
+        </ul>
+      </div>
+
+      <div class="work-block">
+        <div class="work-header">
+          <div class="w-role">Multidisciplinary Studies — University of Belgrade</div>
+          <div class="w-period">2017 — 2022</div>
+        </div>
+        <div class="w-org"><a href="https://rdn.studije.rect.bg.ac.rs/nastavnici/" target="_blank">Computing in Social Sciences (MSc)</a> & <a href="https://is.studije.rect.bg.ac.rs/nastavnici/" target="_blank">Intelligent Systems (PhD)</a></div>
+        <ul class="w-courses">
+          <li>Programming for Linguists (MSc)</li>
+          <li>Introduction to Cognitive Linguistics (MSc)</li>
+          <li>Natural Language Processing (PhD)</li>
+          <li>Machine Learning (PhD)</li>
+        </ul>
+      </div>
+
+      <div class="work-block">
+        <div class="work-header">
+          <div class="w-role">Junior Lecturer — Faculty of Mathematics</div>
+          <div class="w-period">2015 — 2016</div>
+        </div>
+        <div class="w-org"><a href="http://poincare.matf.bg.ac.rs/~branislavas" target="_blank">University of Belgrade, Faculty of Mathematics</a></div>
+        <ul class="w-courses">
+          <li>Programming (BSc)</li>
+          <li>Introduction to Computer Architecture (BSc)</li>
+          <li>Object-Oriented Programming (BSc)</li>
+        </ul>
+      </div>
+
+      <h3 class="sub-title" style="margin-top: 32px;">Software Development</h3>
+      <ul class="clean-list">
+        <li><strong>ALTI DOO</strong>, Belgrade, Serbia <span style="color:var(--ink-muted)">— 2015</span> <a href="https://www.alti.rs/" target="_blank" style="font-family:var(--mono); font-size:12px;">↗</a></li>
+        <li><strong>SAP SE</strong>, Walldorf, Germany — Research and Innovation Department <span style="color:var(--ink-muted)">— 2014</span> <a href="https://www.kapaflexcy.de/" target="_blank" style="font-family:var(--mono); font-size:12px;">↗</a></li>
+        <li><strong>Freelance Java Developer</strong> <span style="color:var(--ink-muted)">— 2008–2015</span></li>
+      </ul>
+    </section>
+
+    <!-- ── MENTORSHIP ────────────────────────────────────────────── -->
+    <section id="mentorship">
+      <span class="eyebrow">Mentorship & Supervision</span>
+      <h2 class="section-title">Students <em>I've guided</em>.</h2>
+
+      <h3 class="sub-title">Master Students</h3>
+      <ul class="clean-list">
+        <li><strong>Milica Vasković</strong>, Faculty of Philology, UB: <em>Information and Media Literacy in the School Library of the 21st Century.</em> Defended 01.06.2021 — supervisor.</li>
+        <li><strong>Sonja Lukić</strong>, Faculty of Philology, UB: <em>Hate Speech in Serbian and Spanish Tweets.</em> Defended 26.02.2021 — defense committee member.</li>
+        <li><strong>Petar Popović</strong>, Faculty of Philology, UB: <em>Technical Support for Corpora Preparation.</em> Defended 30.09.2020 — defense committee member.</li>
+        <li><strong>Anastasja Mandić</strong>, Faculty of Philology, UB: <em>Automatic Conversion of e-bibliographies from BibTeX to BibLaTeX.</em> Defended 27.09.2018 — defense committee member.</li>
+      </ul>
+
+      <h3 class="sub-title">PhD Students</h3>
+      <ul class="clean-list">
+        <li><strong>Olivera Kitanović</strong>, Faculty of Mining and Geology, UB: <em>An Ontology-Based Model for Risk Management in Mining.</em> Defended 16.07.2021 — committee member.</li>
+        <li><strong>Tanja Ivanović</strong>, Faculty of Philology, UB: <em>Terminology Development in Power Engineering Based on Natural Language Processing Methods.</em> Defended 09.03.2022 — committee member.</li>
+      </ul>
+    </section>
+
+    <!-- ── SERVICE ──────────────────────────────────────────────── -->
+    <section id="service">
+      <span class="eyebrow">Service & Recognition</span>
+      <h2 class="section-title">Awards, editorial roles, <em>and program committees</em>.</h2>
+
+      <h3 class="sub-title">Awards & Internships</h3>
+      <ul class="clean-list">
+        <li><strong>Annual Award of the Mathematical Institute of the Serbian Academy of Sciences and Arts</strong> in the field of computing for PhD students, 2021. <a href="http://www.mi.sanu.ac.rs/novi_sajt/aboutus/student.php" target="_blank" style="font-family:var(--mono); font-size:12px;">↗</a></li>
+        <li><strong>Zoran Đinđić Internship Program of German Business</strong>, 2014. <a href="http://www.fond-djindjic.org/en/stipendisti/nemacki-program/jedanaesta-generacija/691-sandrih-branislava" target="_blank" style="font-family:var(--mono); font-size:12px;">↗</a></li>
+        <li><strong>Dositeja Internship</strong>, 2014. <a href="https://www.fondzamladetalente.rs/" target="_blank" style="font-family:var(--mono); font-size:12px;">↗</a></li>
+        <li><strong>Best Students of the City of Pančevo</strong>, 2013–2015.</li>
+        <li><strong>Best Students of Faculty of Mathematics</strong>, 2012.</li>
+        <li><strong>Ministry of Education, Science and Technology Advancement Internship</strong>, 2011–2015.</li>
+      </ul>
+
+      <h3 class="sub-title">Invited Seminars</h3>
+      <ul class="clean-list">
+        <li><strong>EMTTI 8-week LaTeX workshop</strong>, University of Wolverhampton, UK — Feb–Apr 2021.</li>
+        <li><strong>EMTTI modules</strong> on Corpus-based Translation, Terminology, Lexicography and Dictionaries, University of Málaga, Spain — Mar 2021.</li>
+        <li><strong>Informatics and Computer Engineering Seminar</strong>, Technological Educational Institute of Athens — Jun 2019. <a href="http://users.teiath.gr/nnk/InternationalLectures/IL_index.htm" target="_blank" style="font-family:var(--mono); font-size:12px;">↗</a></li>
+        <li><strong>Serbian Unitex Day</strong>, JeRTeh, Belgrade — Mar 2019. <a href="http://jerteh.rs/?page_id=1793" target="_blank" style="font-family:var(--mono); font-size:12px;">↗</a></li>
+        <li><strong>Research Institute in Information and Language Processing Seminar</strong>, University of Wolverhampton — Aug 2018. <a href="http://rgcl.wlv.ac.uk/2018/08/02/fingerprints-in-sms-messages-a-seminar-by-branislava-sandrih/" target="_blank" style="font-family:var(--mono); font-size:12px;">↗</a></li>
+      </ul>
+
+      <h3 class="sub-title">Program Committees & Reviewing</h3>
+      <ul class="clean-list">
+        <li><a href="https://www.cambridge.org/core/journals/natural-language-processing" target="_blank">Journal of Natural Language Processing</a> · <a href="https://www.cambridge.org/core/journals/natural-language-engineering" target="_blank">Journal of Natural Language Engineering</a> · <a href="https://www.emerald.com/insight/publication/issn/0264-0473" target="_blank">The Electronic Library</a> · <a href="http://infoteka.bg.ac.rs/index.php/en/" target="_blank">Infotheca</a></li>
+        <li><a href="http://lml.bas.bg/ranlp2025/pc.php" target="_blank">RANLP 2025</a> · <a href="http://lml.bas.bg/ranlp2023/pc.php" target="_blank">RANLP 2023</a> · <a href="http://lml.bas.bg/ranlp2019/pc.php" target="_blank">RANLP 2019</a> · <a href="https://www.sdjt.si/wp/dogodki/konference/jtdh-2022/#odbor" target="_blank">JT-DH 2022</a> · <a href="https://lrec2022.lrec-conf.org/en/" target="_blank">LREC 2022</a> · <a href="https://multiword.org/mwe2021/#committee" target="_blank">MWE 2021</a> · <a href="https://www.aclweb.org/anthology/2020.coling-main.0/" target="_blank">COLING 2020</a> · <a href="http://www.lrec-conf.org/proceedings/lrec2020/LREC-2020.pdf" target="_blank">LREC 2020</a></li>
+      </ul>
+
+      <h3 class="sub-title">Editorial & Conference Organization</h3>
+      <ul class="clean-list">
+        <li><strong>Editorial Administrator</strong> — <a href="https://www.cambridge.org/core/journals/natural-language-engineering/information/editorial-board" target="_blank">Journal of Natural Language Engineering</a></li>
+        <li><strong>Executive Editor</strong> — <a href="http://infoteka.bg.ac.rs/index.php/en/r-d-ci" target="_blank">Journal of Digital Humanities Infotheca</a></li>
+        <li><strong>Organizing Committee</strong> — <a href="https://ranlp.org/ranlp2021/contacts.php" target="_blank">RANLP 2021</a> · <a href="https://sites.google.com/view/ranlp-stud-2019/home" target="_blank">RANLP 2019 Student Research Workshop</a></li>
+      </ul>
+
+      <h3 class="sub-title">Memberships</h3>
+      <ul class="clean-list">
+        <li>Member, <a href="http://jerteh.rs/?lang=en" target="_blank">Society for Language Resources and Technologies JeRTeh</a></li>
+        <li>Visiting researcher, <a href="http://rgcl.wlv.ac.uk/people/" target="_blank">Research Group in Computational Linguistics, University of Wolverhampton</a></li>
+        <li>Contact person for <a href="https://elex.is/portfolio-item/ubflf/" target="_blank">ELEXIS</a> on behalf of UB Faculty of Philology</li>
+      </ul>
+
+      <h3 class="sub-title">Languages</h3>
+      <ul class="clean-list">
+        <li><strong>Serbian</strong> — native &nbsp;·&nbsp; <strong>English</strong> — C1 &nbsp;·&nbsp; <strong>Spanish</strong> — C1 &nbsp;·&nbsp; <strong>German</strong> — B1</li>
+      </ul>
+    </section>
+
+    <!-- ── PERSONAL ─────────────────────────────────────────────── -->
+    <section id="personal" style="border-bottom: none;">
+      <span class="eyebrow">Personal</span>
+      <h2 class="section-title">Beyond <em>the research.</em></h2>
+      <div class="personal">
+        <p>In August 2021, Branislava welcomed her first son into the world — <span class="names">Mihailo (Miki)</span>.</p>
+        <p>In June 2024, her family grew again with the arrival of <span class="names">Danilo (Daki)</span>.</p>
+        <div class="hearts">🌻 ❤️ 🌻</div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    branislava.sandrih [at] gmail.com &nbsp;·&nbsp; Made with <span class="heart">♥</span> in Belgrade
+  </footer>
+
+  <script>
+    // Smooth scroll already in CSS. Active nav highlight on scroll:
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('nav ul a');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('id');
+          navLinks.forEach(link => {
+            link.style.background = '';
+            link.style.color = '';
+            if (link.getAttribute('href') === '#' + id) {
+              link.style.background = 'var(--accent-bg)';
+              link.style.color = 'var(--accent)';
+            }
+          });
+        }
+      });
+    }, { rootMargin: '-30% 0px -60% 0px' });
+    sections.forEach(s => observer.observe(s));
+  </script>
+
+</body>
+</html>
